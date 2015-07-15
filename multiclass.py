@@ -11,9 +11,8 @@ def main():
   clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
   train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
 
-
   # setting up hyper parameters
-  TRAIN_LEN = int(len(train_tmp) * (90/100.0))
+  TRAIN_LEN = int(len(train_tmp) * (100/100.0))
 
   # training weights
   d = [1.0/TRAIN_LEN] * TRAIN_LEN
@@ -54,6 +53,7 @@ def main():
     epsilon = 0
     for i in range(0, len(predicted_y)):
       epsilon += d[i] * pi(predicted_y[i], train_y[i])
+    print epsilon
 
     # This is to calculate the weights fo each classifier
     alpha = 1
@@ -74,19 +74,20 @@ def main():
     classifers.append((alpha, copy.deepcopy(clf)))
 
   # Now we're ready to test the accuracy from classifers
-  correct = 0
-  for i in range(len(test_x)):
-    tmp_test_x = test_x[i]
-    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
-    for alpha, clf in classifers:
-      predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
-      tmp[predicted_y] += alpha
-    
-    # Test if the predictions are correct
-    if getIndex(tmp) == test_y[i]:
-      correct += 1
+  if TRAIN_LEN != len(train_tmp):
+    correct = 0
+    for i in range(len(test_x)):
+      tmp_test_x = test_x[i]
+      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+      for alpha, clf in classifers:
+        predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
+        tmp[predicted_y] += alpha
+      
+      # Test if the predictions are correct
+      if getIndex(tmp) == test_y[i]:
+        correct += 1
 
-  print 1.0 * correct/len(test_x)
+    print 1.0 * correct/len(test_x)
 
 
 # Return the 
