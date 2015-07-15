@@ -8,12 +8,12 @@ K = 8
 
 # this algorithm follows directly from class
 def main():
-  clf = tree.DecisionTreeClassifier(max_depth=3, criterion='entropy')
+  clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
   train_tmp = genfromtxt('data/data-filtered-binary-number.txt')
 
 
   # setting up hyper parameters
-  TRAIN_LEN = int(len(train_tmp) * (50/100.0))
+  TRAIN_LEN = int(len(train_tmp) * (90/100.0))
 
   # training weights
   d = [1.0/TRAIN_LEN] * TRAIN_LEN
@@ -52,29 +52,26 @@ def main():
 
     # Getting epsilon
     epsilon = 0
-    total_weight = 0
     for i in range(0, len(predicted_y)):
       epsilon += d[i] * pi(predicted_y[i], train_y[i])
-      total_weight += d[i]
-    epsilon /= total_weight
 
     # This is to calculate the weights fo each classifier
     alpha = 1
     if epsilon != 0:
       # Updates and normalizing the weights
-      alpha = math.log((1-epsilon)/epsilon) + log(K - 1)
-      total_weight_new = 0
+      alpha = math.log((1-epsilon)/epsilon) + math.log(K - 1)
+      total_weight = 0
       for i in range(0, len(predicted_y)):
         power = alpha * pi(train_y[i], predicted_y[i])
         d[i] = d[i] * math.pow(math.e, power)
-        total_weight_new += d[i]
+        total_weight += d[i]
 
       # Normalizing
       for i in range(0, len(predicted_y)):
-        d[i] = d[i] / total_weight_new
+        d[i] = d[i] / total_weight
 
     # Storing all classifer and its weight
-    classifers.append( (alpha, copy.deepcopy(clf)) )
+    classifers.append((alpha, copy.deepcopy(clf)))
 
   # Now we're ready to test the accuracy from classifers
   correct = 0
@@ -89,9 +86,10 @@ def main():
     if getIndex(tmp) == test_y[i]:
       correct += 1
 
-  print 1.0*correct/len(test_x)
+  print 1.0 * correct/len(test_x)
 
 
+# Return the 
 def getIndex(predicted_y):
   res_val = 0
   res_index = 0
@@ -102,6 +100,7 @@ def getIndex(predicted_y):
 
   return res_index + 1
 
+# Return 1 if the n1 and n2 are not equal, otherwise return 0
 def pi(n1, n2):
   if n1 != n2:
     return 1
