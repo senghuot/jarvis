@@ -1,16 +1,19 @@
 from numpy import *
 from sklearn import tree
+import copy
 
-ITERATIONS = 10
+classifers = []
+ITERATIONS = 100
+K = 8
 
 # this algorithm follows directly from class
 def main():
-  clf = tree.DecisionTreeClassifier(max_depth=1, criterion='entropy')
+  clf = tree.DecisionTreeClassifier(max_depth=3, criterion='entropy')
   train_tmp = genfromtxt('data/data-filtered-binary-number.txt')
 
 
   # setting up hyper parameters
-  TRAIN_LEN = int(len(train_tmp) * (10/100.0))
+  TRAIN_LEN = int(len(train_tmp) * (50/100.0))
 
   # training weights
   d = [1.0/TRAIN_LEN] * TRAIN_LEN
@@ -49,18 +52,20 @@ def main():
 
     # Getting epsilon
     epsilon = 0
+    total_weight = 0
     for i in range(0, len(predicted_y)):
       epsilon += d[i] * pi(predicted_y[i], train_y[i])
+      total_weight += d[i]
+    epsilon /= total_weight
 
-
-
+    # This is to calculate the weights fo each classifier
     alpha = 1
     if epsilon != 0:
       # Updates and normalizing the weights
-      alpha = 0.5 * math.log((1-epsilon)/epsilon)
+      alpha = math.log((1-epsilon)/epsilon) + log(K - 1)
       total_weight_new = 0
       for i in range(0, len(predicted_y)):
-        power = -1 * alpha * train_y[i] * predicted_y[i]
+        power = alpha * pi(train_y[i], predicted_y[i])
         d[i] = d[i] * math.pow(math.e, power)
         total_weight_new += d[i]
 
@@ -68,14 +73,34 @@ def main():
       for i in range(0, len(predicted_y)):
         d[i] = d[i] / total_weight_new
 
-    # Accumulate voting on training data
-    correct = 0
-    final_y += alpha * clf.predict(test_x)
-    for i in range(0, len(final_y)):
-      if sign(final_y[i]) == test_y[i]:
-        correct += 1 
+    # Storing all classifer and its weight
+    classifers.append( (alpha, copy.deepcopy(clf)) )
+
+  # Now we're ready to test the accuracy from classifers
+  correct = 0
+  for i in range(len(test_x)):
+    tmp_test_x = test_x[i]
+    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+    for alpha, clf in classifers:
+      predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
+      tmp[predicted_y] += alpha
     
-    print 100.0 * correct / len(final_y)
+    # Test if the predictions are correct
+    if getIndex(tmp) == test_y[i]:
+      correct += 1
+
+  print 1.0*correct/len(test_x)
+
+
+def getIndex(predicted_y):
+  res_val = 0
+  res_index = 0
+  for i in range(len(predicted_y)):
+    if predicted_y[i] > res_val:
+      res_val = predicted_y[i]
+      res_index = i
+
+  return res_index + 1
 
 def pi(n1, n2):
   if n1 != n2:
