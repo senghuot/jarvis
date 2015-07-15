@@ -18,15 +18,15 @@ Lead Source			= {blank=-1, Agency Success Program=1, Ambest-List=2, Call-In=3, C
                         Email=8, Demo=9, Employee Referal=10, event=11, web=12, tradeshow=13, seminar=14, external referral=15, jigsaw=16, lead pass=17, 
                         marketing campaign=18, public relations=19, other=20}
 
-Annual Revenue		= {blank=-1, }
+Annual Revenue		= {blank=-1}
 
-Employees			= {blank=-1, }
+Employees			= {blank=-1}
 
 Has Core Products	= {No=0, Yes=1}
 
-# Locations			= {blank=-1, }
+# Locations			= {blank=-1}
 
-# of Producers		= {blank=-1, }
+# of Producers		= {blank=-1}
 
 Open Opp $			= {}
 

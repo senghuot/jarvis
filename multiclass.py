@@ -3,7 +3,7 @@ from sklearn import tree
 import copy
 
 classifers = []
-ITERATIONS = 100
+ITERATIONS = 182
 K = 8
 
 # this algorithm follows directly from class
@@ -27,11 +27,11 @@ def main():
     train_y.append(tmp[len(tmp)-1])
 
   # Testing set
+  test_tmp = genfromtxt('data/multiclass/raw-small.txt')
   test_x = []
   test_y = []
-
-  for i in range(TRAIN_LEN, len(train_tmp)):
-    tmp = train_tmp[i]
+  for i in range(len(test_tmp)):
+    tmp = test_tmp[i]
     test_x.append(tmp[0:len(tmp)-1])
     test_y.append(tmp[len(tmp)-1])
 
@@ -53,7 +53,6 @@ def main():
     epsilon = 0
     for i in range(0, len(predicted_y)):
       epsilon += d[i] * pi(predicted_y[i], train_y[i])
-    print epsilon
 
     # This is to calculate the weights fo each classifier
     alpha = 1
@@ -74,20 +73,18 @@ def main():
     classifers.append((alpha, copy.deepcopy(clf)))
 
   # Now we're ready to test the accuracy from classifers
-  if TRAIN_LEN != len(train_tmp):
-    correct = 0
-    for i in range(len(test_x)):
-      tmp_test_x = test_x[i]
-      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
-      for alpha, clf in classifers:
-        predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
-        tmp[predicted_y] += alpha
-      
-      # Test if the predictions are correct
-      if getIndex(tmp) == test_y[i]:
-        correct += 1
-
-    print 1.0 * correct/len(test_x)
+  correct = 0
+  for i in range(len(test_x)):
+    tmp_test_x = test_x[i]
+    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+    for alpha, clf in classifers:
+      predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
+      tmp[predicted_y] += alpha
+    
+    # Test if the predictions are correct
+    if getIndex(tmp) == test_y[i]:
+      correct += 1
+  print 1.0 * correct/len(test_x)
 
 
 # Return the 
