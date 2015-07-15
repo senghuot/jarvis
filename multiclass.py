@@ -9,7 +9,7 @@ K = 8
 # this algorithm follows directly from class
 def main():
   clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
-  train_tmp = genfromtxt('data/data-filtered-binary-number.txt')
+  train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
 
 
   # setting up hyper parameters

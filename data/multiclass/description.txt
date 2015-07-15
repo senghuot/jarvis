@@ -1,0 +1,39 @@
+Features
+---------
+Amount				= {blank=-1}
+
+Account Type		= {Customer=1, Former Customer=2, Government=3, Midwest=4, Online Customer=5, Partner=6, Prospect=7}
+
+Booking Type	 	= {Addon=1, Cross-Sell=2, New Business=3}
+
+Expected Revenue 	= {blank=-1}
+
+# Product			= {}
+
+Opp Record Type		= {Add-on=1, Administrative=2, Migration=3, Standard=4}
+
+Forecast Category	= {Best Case=1, Commit=2, Pipeline=3, Ommited=4, Closed=5}
+
+Lead Source			= {blank=-1, Agency Success Program=1, Ambest-List=2, Call-In=3, Client-Referall=4, Cold-Call=5, Contact List=6, Current Customer=7, 
+                        Email=8, Demo=9, Employee Referal=10, event=11, web=12, tradeshow=13, seminar=14, external referral=15, jigsaw=16, lead pass=17, 
+                        marketing campaign=18, public relations=19, other=20}
+
+Annual Revenue		= {blank=-1, }
+
+Employees			= {blank=-1, }
+
+Has Core Products	= {No=0, Yes=1}
+
+# Locations			= {blank=-1, }
+
+# of Producers		= {blank=-1, }
+
+Open Opp $			= {}
+
+Open Opp Count		= {}
+
+
+
+Classifiers
+-----------
+Stage				= {won=1, approved=2, propose=3, prospect=4, qualify=5, solution developement=6, whitespace=7, closed=8}
