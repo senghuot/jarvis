@@ -3,7 +3,7 @@ from sklearn import tree
 import copy
 
 classifers = []
-ITERATIONS = 1
+ITERATIONS = 182
 K = 8
 
 # this algorithm follows directly from class
@@ -75,6 +75,7 @@ def main():
   # Now we're ready to test the accuracy from classifers
   print testing(classifers, test_x, test_y)
 
+
 # Return the percentage of accuracy rate
 def testing(classifers, test_x, test_y): 
   correct = 0
@@ -91,7 +92,8 @@ def testing(classifers, test_x, test_y):
 
   return 1.0 * correct/len(test_x)
 
-# Return the 
+
+# Return the prediction rate
 def getIndex(predicted_y):
   res_val = 0
   res_index = 0
