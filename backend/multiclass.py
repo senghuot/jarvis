@@ -7,7 +7,7 @@ class Multiclass:
 
   def __init__(self):
     self.classifers = []
-    self.ITERATIONS = 182
+    self.ITERATIONS = 1
     self.K = 8
     self.train()
 
@@ -77,8 +77,14 @@ class Multiclass:
       # Storing all classifer and its weight
       self.classifers.append((alpha, copy.deepcopy(clf)))
 
-    # Now we're ready to test the accuracy from classifers
-    print self.testing(test_x, test_y)
+  def compute(self, test_x):
+    for i in range(len(test_x)):
+      tmp_test_x = test_x[i]
+      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+      for alpha, clf in self.classifers:
+        predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
+        tmp[predicted_y] += alpha
+    return self.getIndex(tmp)
 
 
   # Return the percentage of accuracy rate
