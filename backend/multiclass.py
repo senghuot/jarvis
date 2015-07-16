@@ -2,113 +2,113 @@ from numpy import *
 from sklearn import tree
 import copy
 
-classifers = []
-ITERATIONS = 182
-K = 8
 
-# this algorithm follows directly from class
-def main():
-  clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
-  train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
+class Multiclass:
 
-  # setting up hyper parameters
-  TRAIN_LEN = int(len(train_tmp) * (100/100.0))
+  def __init__(self):
+    self.classifers = []
+    self.ITERATIONS = 182
+    self.K = 8
+    self.train()
 
-  # training weights
-  d = [1.0/TRAIN_LEN] * TRAIN_LEN
+  # this algorithm follows directly from class
+  def train(self):
+    clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
+    train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
 
-  # training our data
-  train_x = []
-  train_y = []
+    # setting up hyper parameters
+    TRAIN_LEN = int(len(train_tmp) * (100/100.0))
 
-  for i in range(0, TRAIN_LEN):
-    tmp = train_tmp[i]
-    train_x.append(tmp[0:len(tmp)-1])
-    train_y.append(tmp[len(tmp)-1])
+    # training weights
+    d = [1.0/TRAIN_LEN] * TRAIN_LEN
 
-  # Testing set
-  test_tmp = genfromtxt('data/multiclass/raw-small.txt')
-  test_x = []
-  test_y = []
-  for i in range(len(test_tmp)):
-    tmp = test_tmp[i]
-    test_x.append(tmp[0:len(tmp)-1])
-    test_y.append(tmp[len(tmp)-1])
+    # training our data
+    train_x = []
+    train_y = []
 
-  # Convert narrays to matrices
-  train_x = matrix(train_x)
-  train_y = matrix(train_y).reshape(len(train_y),1)
-  test_x  = matrix(test_x)
-  test_y  = matrix(test_y).reshape(len(test_y),1)
+    for i in range(0, TRAIN_LEN):
+      tmp = train_tmp[i]
+      train_x.append(tmp[0:len(tmp)-1])
+      train_y.append(tmp[len(tmp)-1])
 
-  # Accumulation of Ys
-  final_y = [0] * len(test_y)
+    # Testing set
+    test_tmp = genfromtxt('data/multiclass/raw-small.txt')
+    test_x = []
+    test_y = []
+    for i in range(len(test_tmp)):
+      tmp = test_tmp[i]
+      test_x.append(tmp[0:len(tmp)-1])
+      test_y.append(tmp[len(tmp)-1])
 
-  for iteration in range(0, ITERATIONS): 
-    # Checking for error rate for training data
-    clf = clf.fit(train_x, train_y, sample_weight=d)
-    predicted_y = clf.predict(train_x)
+    # Convert narrays to matrices
+    train_x = matrix(train_x)
+    train_y = matrix(train_y).reshape(len(train_y),1)
+    test_x  = matrix(test_x)
+    test_y  = matrix(test_y).reshape(len(test_y),1)
 
-    # Getting epsilon
-    epsilon = 0
-    for i in range(0, len(predicted_y)):
-      epsilon += d[i] * pi(predicted_y[i], train_y[i])
+    # Accumulation of Ys
+    final_y = [0] * len(test_y)
 
-    # This is to calculate the weights fo each classifier
-    alpha = 1
-    if epsilon != 0:
-      # Updates and normalizing the weights
-      alpha = math.log((1-epsilon)/epsilon) + math.log(K - 1)
-      total_weight = 0
-      for i in range(0, len(predicted_y)):
-        power = alpha * pi(train_y[i], predicted_y[i])
-        d[i] = d[i] * math.pow(math.e, power)
-        total_weight += d[i]
+    for iteration in range(0, self.ITERATIONS): 
+      # Checking for error rate for training data
+      clf = clf.fit(train_x, train_y, sample_weight=d)
+      predicted_y = clf.predict(train_x)
 
-      # Normalizing
-      for i in range(0, len(predicted_y)):
-        d[i] = d[i] / total_weight
+      # Getting epsilon
+      epsilon = 0
+      for i in range(len(predicted_y)):
+        epsilon += d[i] * self.pi(predicted_y[i], train_y[i])
 
-    # Storing all classifer and its weight
-    classifers.append((alpha, copy.deepcopy(clf)))
+      # This is to calculate the weights fo each classifier
+      alpha = 1
+      if epsilon != 0:
+        # Updates and normalizing the weights
+        alpha = math.log((1-epsilon)/epsilon) + math.log(self.K - 1)
+        total_weight = 0
+        for i in range(0, len(predicted_y)):
+          power = alpha * self.pi(train_y[i], predicted_y[i])
+          d[i] = d[i] * math.pow(math.e, power)
+          total_weight += d[i]
 
-  # Now we're ready to test the accuracy from classifers
-  print testing(classifers, test_x, test_y)
+        # Normalizing
+        for i in range(0, len(predicted_y)):
+          d[i] = d[i] / total_weight
 
+      # Storing all classifer and its weight
+      self.classifers.append((alpha, copy.deepcopy(clf)))
 
-# Return the percentage of accuracy rate
-def testing(classifers, test_x, test_y): 
-  correct = 0
-  for i in range(len(test_x)):
-    tmp_test_x = test_x[i]
-    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
-    for alpha, clf in classifers:
-      predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
-      tmp[predicted_y] += alpha
-    
-    # Test if the predictions are correct
-    if getIndex(tmp) == test_y[i]:
-      correct += 1
-
-  return 1.0 * correct/len(test_x)
+    # Now we're ready to test the accuracy from classifers
+    print self.testing(test_x, test_y)
 
 
-# Return the prediction rate
-def getIndex(predicted_y):
-  res_val = 0
-  res_index = 0
-  for i in range(len(predicted_y)):
-    if predicted_y[i] > res_val:
-      res_val = predicted_y[i]
-      res_index = i
+  # Return the percentage of accuracy rate
+  def testing(self, test_x, test_y): 
+    correct = 0
+    for i in range(len(test_x)):
+      tmp_test_x = test_x[i]
+      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+      for alpha, clf in self.classifers:
+        predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
+        tmp[predicted_y] += alpha
+      # Test if the predictions are correct
+      if self.getIndex(tmp) == test_y[i]:
+        correct += 1
+    return 1.0 * correct/len(test_x)
 
-  return res_index + 1
 
-# Return 1 if the n1 and n2 are not equal, otherwise return 0
-def pi(n1, n2):
-  if n1 != n2:
-    return 1
-  return 0
+  # Return the prediction rate
+  def getIndex(self, predicted_y):
+    res_val = 0
+    res_index = 0
+    for i in range(len(predicted_y)):
+      if predicted_y[i] > res_val:
+        res_val = predicted_y[i]
+        res_index = i
 
-if __name__ == '__main__':
-  main()
+    return res_index + 1
+
+  # Return 1 if the n1 and n2 are not equal, otherwise return 0
+  def pi(self, n1, n2):
+    if n1 != n2:
+      return 1
+    return 0
