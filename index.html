@@ -55,7 +55,7 @@
           </div>
           <div class="form-group">
               <div class="col-xs-offset-2 col-xs-10">
-                  <button type="submit" class="btn btn-primary">Compute</button>
+                  <button id="compute-btn" ng-click="computeBtnClicked()" class="btn btn-primary">Compute</button>
               </div>
           </div>
       </form>
@@ -76,9 +76,8 @@
           audio.play();
 
           // this is too request server to train the data
-          $http.get("http://127.0.0.1:5000/init")
+          $http.get('http://127.0.0.1:5000/init')
             .success(function(response){
-              console.log(response);
               $('#loading').removeClass().addClass('bounceOut animated');
               $('#next').toggle().addClass('bounceIn animated');
               audio.pause();
@@ -90,8 +89,41 @@
         $scope.nextBtnClicked = function() {
           $('#next').toggle();
           $('#compute').toggle();
-          console.log('hello');
         };
+
+        // compute the result without encodig the result first
+        $scope.computeBtnClicked = function() {
+
+          data = {
+                  customers:[
+                    {
+                      amount           : 147060,
+                      accountType      : 1,
+                      bookingType      : 2,
+                      expectedRevenue  : 58824,
+                      numProducts      : 13,
+                      oppRecordType    : 4,
+                      forecastCategory : 3,
+                      leadSource       : 10,
+                      annualRevenue    : 350000,
+                      employees        : 20,
+                      hasCoreProducts  : 0,
+                      numLocations     : -1,
+                      numProducers     : -1,
+                      openOpp          : 147160,
+                      openOppCount     : 2
+                    }
+                  ] 
+                };
+
+          $http.post('http://127.0.0.1:5000/compute', data)
+            .success(function(response) {
+              console.log(response);
+            }).error(function(error) {
+              console.log(error);
+            });
+        };
+
       });
 
     </script>
