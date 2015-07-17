@@ -6,3 +6,17 @@
   margin-right: auto;
   text-align: center;
 }
+
+#loading {
+  margin-top: 100px;
+  display: none;
+}
+
+#next {
+  -webkit-animation-delay: 1s;
+  display: none;
+}
+
+#compute {
+  display: none;
+}

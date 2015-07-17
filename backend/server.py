@@ -1,7 +1,9 @@
 from multiclass import Multiclass
 from flask import Flask, request, jsonify
+from flask.ext.cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 classifier = None
 
 @app.route("/init")
@@ -9,10 +11,14 @@ def init():
   # training our model with data from multiclass folder
   global classifier
   classifier = Multiclass()
-  return 'Initialized'
+  return jsonify(message='initialized');
 
-@app.route("/compute")
+@app.route("/compute", methods=['GET', 'POST'])
 def compute():
+  # test posting
+  data = request.get_json()
+  print data['message']
+  
   # leave it here for testing only
   init()
 
@@ -22,4 +28,4 @@ def compute():
   return jsonify(classifier=res)
 
 if __name__ == "__main__":
-    app.run()
+    app.run()  

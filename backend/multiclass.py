@@ -7,7 +7,7 @@ class Multiclass:
 
   def __init__(self):
     self.classifers = []
-    self.ITERATIONS = 1
+    self.ITERATIONS = 182
     self.K = 8
     self.train()
 
