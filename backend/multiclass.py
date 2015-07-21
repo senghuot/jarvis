@@ -7,8 +7,9 @@ class Multiclass:
 
   def __init__(self):
     self.classifers = []
-    self.ITERATIONS = 20
-    self.K = 8
+    self.rec_x      = []
+    self.ITERATIONS = 182
+    self.K          = 8
     self.train()
 
   # this algorithm follows directly from class
@@ -17,21 +18,28 @@ class Multiclass:
     train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
 
     # setting up hyper parameters
-    TRAIN_LEN = int(len(train_tmp) * (100/100.0))
+    TRAIN_LEN = len(train_tmp)
 
     # training weights
     d = [1.0/TRAIN_LEN] * TRAIN_LEN
 
-    # training our data
+    # build a training and recommended dataset
     train_x = []
+    rec_x   = []
     train_y = []
 
     for i in range(0, TRAIN_LEN):
-      tmp = train_tmp[i]
-      train_x.append(tmp[0:len(tmp)-1])
-      train_y.append(tmp[len(tmp)-1])
+      tmp   = train_tmp[i]
+      tmp_x = tmp[0:len(tmp)-1]
+      tmp_y = tmp[len(tmp)-1]     
 
-    # Testing set
+      train_x.append(tmp_x)
+      train_y.append(tmp_y)
+      # add x if the y is equivalent to won
+      if tmp_y == 1.0:
+        self.rec_x.append(tmp_x)
+
+    # testing set
     test_tmp = genfromtxt('data/multiclass/multiclass-test.txt')
     test_x = []
     test_y = []
@@ -40,17 +48,18 @@ class Multiclass:
       test_x.append(tmp[0:len(tmp)-1])
       test_y.append(tmp[len(tmp)-1])
 
-    # Convert narrays to matrices
+    # convert narrays to matrices
     train_x = matrix(train_x)
+    self.rec_x   = matrix(self.rec_x)
     train_y = matrix(train_y).reshape(len(train_y),1)
     test_x  = matrix(test_x)
     test_y  = matrix(test_y).reshape(len(test_y),1)
 
-    # Accumulation of Ys
+    # accumulation of Ys
     final_y = [0] * len(test_y)
 
     for iteration in range(0, self.ITERATIONS): 
-      # Checking for error rate for training data
+      # checking for error rate for training data
       clf = clf.fit(train_x, train_y, sample_weight=d)
       predicted_y = clf.predict(train_x)
 
@@ -78,16 +87,27 @@ class Multiclass:
       self.classifers.append((alpha, copy.deepcopy(clf)))
 
   def compute(self, test_x):
-    for i in range(len(test_x)):
-      tmp_test_x = test_x[i]
-      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
-      for alpha, clf in self.classifers:
-        predicted_y = int(clf.predict(tmp_test_x)[0]) - 1
-        tmp[predicted_y] += alpha
+    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+    for alpha, clf in self.classifers:
+      predicted_y = int(clf.predict(test_x)) - 1
+      tmp[predicted_y] += alpha
     return self.getIndex(tmp)
 
 
-  # Return the percentage of accuracy rate
+  def recommend(self, test_x):
+    diff    = self.rec_x - test_x
+    sim_x   = None
+    sim_dis = 0
+    for i in range(len(diff)):
+      tmp = math.sqrt(diff[i] * diff[i].T)
+      sim = 1.0 / (1 + tmp)
+      if (sim > sim_dis):
+        sim_dis = sim
+        sim_x = self.rec_x[i]
+    return sim_x
+
+
+  # return the percentage of accuracy rate
   def testing(self, test_x, test_y): 
     correct = 0
     for i in range(len(test_x)):
@@ -102,7 +122,7 @@ class Multiclass:
     return 1.0 * correct/len(test_x)
 
 
-  # Return the prediction rate
+  # return the prediction rate
   def getIndex(self, predicted_y):
     res_val = 0
     res_index = 0
@@ -113,7 +133,7 @@ class Multiclass:
 
     return res_index + 1
 
-  # Return 1 if the n1 and n2 are not equal, otherwise return 0
+  # return 1 if the n1 and n2 are not equal, otherwise return 0
   def pi(self, n1, n2):
     if n1 != n2:
       return 1
