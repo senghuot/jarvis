@@ -56,6 +56,8 @@ demo.controller('ComputeController', function($scope, $http) {
       tmp[key] = vals[i]
     }
     $scope.customer = tmp;
-  }
-
+  };
 });
+
+
+
