@@ -21,6 +21,11 @@
   display: none;
 }
 
+#input {
+  background-color: white;
+  padding: 10px;
+}
+
 .sub-title {
   padding-left: 40px;
 }

@@ -1,181 +1,218 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-US" data-ng-app="demo">
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Jarvis</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/material-design/dist/css/material.css">
+    <link href="bower_components/material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="bower_components/material-design/dist/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="bower_components/material-design/dist/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/custom.css">
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/material-design/scripts/material.js"></script>
+    <script src="bower_components/material-design/scripts/ripples.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
-  </head>
-    
-  <body>
-    
-    <section id="intro" data-ng-controller="IntroController">
-      <button id="init" type="button" class="btn btn-lg btn-default" ng-click="initBtnClicked()">Start</button>
-      <br/>
-      <button id="next" type="button" class="btn btn-lg btn-success" ng-click="nextBtnClicked()">next</button>
+</head>
 
-      <div id="loading" class="bounceIn animated" data-wow-delay="1s">
-        <img src="images/gears.gif" width="100px">
-      </div>
+<body>
+
+    <section id="intro" data-ng-controller="IntroController">
+        <button id="init" type="button" class="btn btn-lg btn-default" ng-click="initBtnClicked()">Start</button>
+        <br />
+        <button id="next" type="button" class="btn btn-lg btn-success" ng-click="nextBtnClicked()">next</button>
+        <div id="loading" class="bounceIn animated" data-wow-delay="1s">
+            <img src="images/gears.gif" width="100px">
+        </div>
     </section>
 
     <section id="compute" class="container bounceIn animated" ng-controller="ComputeController">
-      <div class="row">
-        <div class="col-xs-3">
-          <h2>Sandbox</h2>
-          <textarea id="input" class="form-control" rows="22" ng-model="sandbox" ng-change="change()"></textarea>
+        <div class="row">
+            <div class="col-xs-3">
+                <h2>Sandbox</h2>
+                <textarea id="input" class="form-control" rows="18" ng-model="sandbox" ng-change="change()"></textarea>
+            </div>
+
+            <form novalidate class="form-horizontal col-xs-8 col-xs-offset-1">
+                <h2 class="col-xs-offset-1">Input Your Data</h2>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Amount</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.amount">
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Annual Revenue</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.annualRevenue">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Expected Revenue</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.expectedRevenue">
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Employee Count</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.employeeCount">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Account Type</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.accountType" class="form-control">
+                            <option value="1">Customer</option>
+                            <option value="2">Former Customer</option>
+                            <option value="3">Government</option>
+                            <option value="4">Midwest</option>
+                            <option value="5">Online Customer</option>
+                            <option value="6">Partner</option>
+                            <option value="7">Prospect</option>
+                        </select>
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Core Product</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.coreProduct" class="form-control">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Booking Type</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.bookingType" class="form-control">
+                            <option value="1">Add-On</option>
+                            <option value="2">Cross-Sell</option>
+                            <option value="3">New Business</option>
+                        </select>
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Location Count</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.locationCount">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Product Count</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.productCount">
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Producer Count</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.producerCount">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Record Type</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.recordType" class="form-control">
+                            <option value="1">Add-On</option>
+                            <option value="2">Administrative</option>
+                            <option value="3">Migration</option>
+                            <option value="4">Standard</option>
+                        </select>
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Opportunity <span>$</span></label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.oppRevenue">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Forecast Category</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.forecastCategory" class="form-control">
+                            <option value="1">Best Case</option>
+                            <option value="2">Commit</option>
+                            <option value="3">Pipeline</option>
+                            <option value="4">Ommited</option>
+                        </select>
+                    </div>
+                    <label for="inputEmail" class="control-label col-xs-2">Opportunity Count </label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" ng-model="customer.oppCount">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label col-xs-2">Lead Source</label>
+                    <div class="col-xs-4 dropdown">
+                        <select ng-model="customer.leadSource" class="form-control">
+                            <option value="1">Agency Success Program</option>
+                            <option value="2">Ambest-List</option>
+                            <option value="3">Call In</option>
+                            <option value="4">Client Referral</option>
+                            <option value="5">Cold Call</option>
+                            <option value="6">Contact List</option>
+                            <option value="7">Current Customer</option>
+                            <option value="8">Email</option>
+                            <option value="9">Demo</option>
+                            <option value="10">Employee Referral</option>
+                            <option value="11">Event</option>
+                            <option value="12">Web</option>
+                            <option value="13">Tradeshow</option>
+                            <option value="14">Seminar</option>
+                            <option value="15">External Referral</option>
+                            <option value="16">Jigsaw</option>
+                            <option value="17">Lead Pass</option>
+                            <option value="18">Marketing Campaign</option>
+                            <option value="19">Public Relations</option>
+                            <option value="20">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <button id="compute-btn" ng-click="computeBtnClicked()" class="btn btn-primary">Compute</button>
+                    </div>
+                </div>
+            </form>
+
         </div>
 
-        <form novalidate class="form-horizontal col-xs-8 col-xs-offset-1">
-          <h2 class="col-xs-offset-1">Input Your Data</h2>
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Amount</label>
-            <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="customer.amount">
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Annual Revenue</label>
-            <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="customer.annualRevenue">
-            </div>
-          </div>
+        <h1 class="header">Dialog</h1>
 
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Expected Revenue</label>
-            <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="customer.expectedRevenue">
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Employee Count</label>
-            <div class="col-xs-4">
-                <input type="text" class="form-control" ng-model="customer.employeeCount">
-            </div>
-          </div>
-            
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Account Type</label>
-            <div class="col-xs-4 dropdown">
-              <select ng-model="customer.accountType" class="form-control">
-                <option value="1">Customer</option>
-                <option value="2">Former Customer</option>
-                <option value="3">Government</option>
-                <option value="4">Midwest</option>
-                <option value="5">Online Customer</option>
-                <option value="6">Partner</option>
-                <option value="7">Prospect</option>
-              </select>
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Core Product</label>
-            <div class="col-xs-4 dropdown">
-              <select ng-model="customer.coreProduct" class="form-control">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-              </select>
-            </div>
-          </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
 
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Booking Type</label>
-            <div class="col-xs-4 dropdown">
-              <select ng-model="customer.bookingType" class="form-control">
-                <option value="1">Add-On</option>
-                <option value="2">Cross-Sell</option>
-                <option value="3">New Business</option>
-              </select>
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Location Count</label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="customer.locationCount">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Product Count</label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="customer.productCount">
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Producer Count</label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="customer.producerCount">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Record Type</label>
-            <div class="col-xs-4 dropdown">
-              <select ng-model="customer.recordType" class="form-control">
-                <option value="1">Add-On</option>
-                <option value="2">Administrative</option>
-                <option value="3">Migration</option>
-                <option value="4">Standard</option>
-              </select>
-            </div>
-            <label for="inputEmail" class="control-label col-xs-2">Opportunity <span>$</span></label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="customer.oppRevenue">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Forecast Category</label>
-              <div class="col-xs-4 dropdown">
-                <select ng-model="customer.forecastCategory" class="form-control">
-                  <option value="1">Best Case</option>
-                  <option value="2">Commit</option>
-                  <option value="3">Pipeline</option>
-                  <option value="4">Ommited</option>
-                </select>
-              </div>
-            <label for="inputEmail" class="control-label col-xs-2">Opportunity Count </label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" ng-model="customer.oppCount">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputEmail" class="control-label col-xs-2">Lead Source</label>
-            <div class="col-xs-4 dropdown">
-              <select ng-model="customer.leadSource" class="form-control">
-                <option value="1">Agency Success Program</option>
-                <option value="2">Ambest-List</option>
-                <option value="3">Call In</option>
-                <option value="4">Client Referral</option>
-                <option value="5">Cold Call</option>
-                <option value="6">Contact List</option>
-                <option value="7">Current Customer</option>
-                <option value="8">Email</option>
-                <option value="9">Demo</option>
-                <option value="10">Employee Referral</option>
-                <option value="11">Event</option>
-                <option value="12">Web</option>
-                <option value="13">Tradeshow</option>
-                <option value="14">Seminar</option>
-                <option value="15">External Referral</option>
-                <option value="16">Jigsaw</option>
-                <option value="17">Lead Pass</option>
-                <option value="18">Marketing Campaign</option>
-                <option value="19">Public Relations</option>
-                <option value="20">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-10">
-              <button id="compute-btn" ng-click="computeBtnClicked()" class="btn btn-primary">Compute</button>
-            </div>
-          </div>
-        </form>
-        
-      </div>
-      <pre>Response = {{response | json}}</pre>
-      <pre>customer = {{customer | json}}</pre>
+        <pre>Response = {{response | json}}</pre>
+        <pre>customer = {{customer | json}}</pre>
     </section>
 
-  </body>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="textareaID">What is this shit</textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#textareaID').focus();
+        });
+    </script>
+</body>
 
 </html>
