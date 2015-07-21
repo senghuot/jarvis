@@ -7,7 +7,7 @@ class Multiclass:
 
   def __init__(self):
     self.classifers = []
-    self.ITERATIONS = 182
+    self.ITERATIONS = 20
     self.K = 8
     self.train()
 
@@ -32,7 +32,7 @@ class Multiclass:
       train_y.append(tmp[len(tmp)-1])
 
     # Testing set
-    test_tmp = genfromtxt('data/multiclass/raw-small.txt')
+    test_tmp = genfromtxt('data/multiclass/multiclass-test.txt')
     test_x = []
     test_y = []
     for i in range(len(test_tmp)):

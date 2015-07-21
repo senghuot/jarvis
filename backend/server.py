@@ -21,9 +21,8 @@ def compute():
   # parse our json object to a matrix array
   customers = request.get_json()
   data =  parse(customers['customers'])
-
-  # compute the data and determine the classifier
-  # data = [[147060 ,1 ,2 ,58824 ,13 , 4, 3, 10,  350000 , 20 , 0 ,-1 , -1  ,147160,  2]]
+  
+  # # compute the data and determine the classifier
   res = classifier.compute(data)
   return jsonify(classifier=res)
 
@@ -39,17 +38,17 @@ def parse(data):
     tmp_array.append(tmp_json['accountType'])
     tmp_array.append(tmp_json['bookingType'])
     tmp_array.append(tmp_json['expectedRevenue'])
-    tmp_array.append(tmp_json['numProducts'])
-    tmp_array.append(tmp_json['oppRecordType'])
+    tmp_array.append(tmp_json['producerCount'])
+    tmp_array.append(tmp_json['recordType'])
     tmp_array.append(tmp_json['forecastCategory'])
     tmp_array.append(tmp_json['leadSource'])
     tmp_array.append(tmp_json['annualRevenue'])
-    tmp_array.append(tmp_json['employees'])
-    tmp_array.append(tmp_json['hasCoreProducts'])
-    tmp_array.append(tmp_json['numLocations'])
-    tmp_array.append(tmp_json['numProducers'])
-    tmp_array.append(tmp_json['openOpp'])
-    tmp_array.append(tmp_json['openOppCount'])
+    tmp_array.append(tmp_json['employeeCount'])
+    tmp_array.append(tmp_json['coreProduct'])
+    tmp_array.append(tmp_json['locationCount'])
+    tmp_array.append(tmp_json['producerCount'])
+    tmp_array.append(tmp_json['oppRevenue'])
+    tmp_array.append(tmp_json['oppCount'])
 
     res.append(tmp_array)
 
