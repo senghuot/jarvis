@@ -1,23 +1,20 @@
+/* ===========================
+--- Intro
+============================ */
 #intro {
-  height: 200px;
+  height: 100%;
   width: 200px;
-  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
 #loading {
-  margin-top: 100px;
   display: none;
 }
 
 #next {
   -webkit-animation-delay: 1s;
-  display: none;
-}
-
-#compute {
   display: none;
 }
 
@@ -30,8 +27,44 @@
   padding-left: 40px;
 }
 
+/* ===========================
+--- Compute
+============================ */
+
 #compute {
   z-index: 1041;
   position: relative;
-  height: 1000px;
+  /*  display: none;*/
+}
+
+
+/* ===========================
+--- About
+============================ */
+
+#about {
+  color: #22313F;
+  background-color: white;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.about-box-desc {
+  background-color: white;
+  padding: 30px 10px 10px 10px;
+}
+
+.boxed-grey {
+  background: #f9f9f9;
+  padding: 20px;
+}
+
+/* ===========================
+--- Footer
+============================ */
+footer {
+  text-align: center;
+  padding: 25px 0 ;
+  color: white;
+  background-color: #333;
 }

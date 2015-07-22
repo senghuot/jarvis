@@ -22,7 +22,8 @@
 <body>
 
     <section id="intro" data-ng-controller="IntroController">
-        <button id="init" type="button" class="btn btn-lg btn-default" ng-click="initBtnClicked()">Start</button>
+
+        <button id="init" type="button" class="btn btn-lg btn-default btn-raised btn-lg" ng-click="initBtnClicked()">Start</button>
         <br />
         <button id="next" type="button" class="btn btn-lg btn-success" ng-click="nextBtnClicked()">next</button>
         <div id="loading" class="bounceIn animated" data-wow-delay="1s">
@@ -184,14 +185,15 @@
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Response</h4>
-                        <pre>Response = {{response | json}}</pre>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                  <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h3 class="panel-title">Response</h3>
+                      </div>
+                      <div class="panel-body">
+                          <pre>Response = {{response | json}}</pre>
+                      </div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -204,8 +206,56 @@
             $('#input').css('opacity', '1');
           })
         </script>
-
     </section>
+
+    <section id="about" class="home-section text-center">
+      <div class="heading-about">
+        <div class="container">
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <div class="wow bounceInDown animated" data-wow-delay="0.2s" style="visibility: visible;-webkit-animation-delay: 0.2s; -moz-animation-delay: 0.2s; animation-delay: 0.2s;">
+              <div class="section-heading">
+              <h2>ABOUT</h2>
+              <div class="icon-preview"><i class="mdi-hardware-keyboard-arrow-down"></i></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="container">
+
+      <div class="row">
+        <div class="col-lg-2 col-lg-offset-5">
+          <hr class="marginbot-50">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="wow fadeInUp animated" data-wow-delay="0.5s" style="visibility: visible;-webkit-animation-delay: 0.5s; -moz-animation-delay: 0.5s; animation-delay: 0.5s;">
+            <div class="about-box well">
+              <img src="images/uw.jpg" class="img-responsive" width="380px">
+              <div class="about-box-desc">
+                <h4>UW CSE</h4>
+                <p>
+                  I'm working toward a Computer Science bachelor's degree at the University of Washington. I'm looking forward to working with many talented classmates and professors in the future.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <h4>Made in Seattle.</h4>
+        </div>
+      </div>
+    </footer>
 </body>
 
 </html>
