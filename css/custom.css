@@ -10,14 +10,19 @@ html, body {
 ============================ */
 #intro {
   min-height: 100%;
-  text-align: center;
   padding-top: 220px;
-  background-image: url("../images/intro-banner.png");
+  background-image: url("../images/polygon-bg-blue.jpg");
+  background-size: 100% 100%;
   color: white;
 }
 
 #init {
-  background-color: white;
+  background-color: rgb(213, 213, 213);
+}
+
+#learn-more {
+  color: white;
+  border: white 1px solid;
 }
 
 #next {
@@ -29,67 +34,43 @@ html, body {
   padding: 10px;
 }
 
-.sub-title {
-  padding-left: 40px;
+.slogan > h1 {
+  font-size: 50px;
+  font-weight: 600;
 }
 
-#video {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  background-size: cover;
+.slogan > h2 {
+  font-size: 35px;
+  color: #1795c5;
 }
 
-/* ===========================
---- Compute
-============================ */
-
-#compute {
-  z-index: 1041;
-  position: relative;
-  padding: 100px 0;
-  background-image: url("../images/compute-banner.png");
+.slogan > .blub {
+  font-size: 17px;
+  width: 970px;
+  font-weight: 100;
 }
 
-
-/* ===========================
---- About
-============================ */
-
-#about {
-  color: #22313F;
-  background-color: white;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
 }
-
-.about-box-desc {
-  background-color: white;
-  padding: 30px 10px 10px 10px;
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
-
-.boxed-grey {
-  background: #f9f9f9;
-  padding: 20px;
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
-
-/* ===========================
---- Footer
-============================ */
-footer {
-  padding: 25px 0 ;
-  color: white;
-  background-color: #242424;
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }
-
 
 .spinner {
   display: none;
@@ -131,4 +112,69 @@ footer {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
+}
+
+.earth {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  bottom: 0;
+}
+
+.earth img {
+    position: absolute;
+    top: 0px;
+    left: 10%;
+    width: 80%;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 35s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+/* ===========================
+--- Compute
+============================ */
+
+#compute {
+  z-index: 1041;
+  position: relative;
+  padding: 100px 0;
+  background-image: url("../images/compute-banner.png");
+}
+
+
+/* ===========================
+--- About
+============================ */
+
+#about {
+  color: white;
+  background-color: rgb(61, 61, 61);
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.about-box-desc {
+  background-color: white;
+  padding: 30px 10px 10px 10px;
+}
+
+.boxed-grey {
+  background: #f9f9f9;
+  padding: 20px;
+}
+
+#description {
+  padding: 0px;
+}
+
+/* ===========================
+--- Footer
+============================ */
+footer {
+  padding: 25px 0 ;
+  color: white;
+  background-color: #000000;
 }
