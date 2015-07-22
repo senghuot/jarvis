@@ -1,20 +1,26 @@
 /* ===========================
+ To get intro fullscreen
+============================ */
+html, body {
+  height:100%
+}
+
+/* ===========================
 --- Intro
 ============================ */
 #intro {
-  height: 100%;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  min-height: 100%;
   text-align: center;
+  padding-top: 220px;
+  background-image: url("../images/intro-banner.png");
+  color: white;
 }
 
-#loading {
-  display: none;
+#init {
+  background-color: white;
 }
 
 #next {
-  -webkit-animation-delay: 1s;
   display: none;
 }
 
@@ -27,6 +33,21 @@
   padding-left: 40px;
 }
 
+#video {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background-size: cover;
+}
+
 /* ===========================
 --- Compute
 ============================ */
@@ -34,7 +55,8 @@
 #compute {
   z-index: 1041;
   position: relative;
-  /*  display: none;*/
+  padding: 100px 0;
+  background-image: url("../images/compute-banner.png");
 }
 
 
@@ -63,8 +85,50 @@
 --- Footer
 ============================ */
 footer {
-  text-align: center;
   padding: 25px 0 ;
   color: white;
-  background-color: #333;
+  background-color: #242424;
+}
+
+
+.spinner {
+  display: none;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }

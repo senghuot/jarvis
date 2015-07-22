@@ -9,7 +9,7 @@ demo.controller('IntroController', function ($scope, $http) {
   $scope.initBtnClicked = function(){
     // display loading screen
     $('#init').toggle();
-    $('#loading').toggle();
+    $('#loading').toggle();    
 
     // grab the music
     var audio = new Audio('intro.mp3');
@@ -18,7 +18,7 @@ demo.controller('IntroController', function ($scope, $http) {
     // this is too request server to train the data
     $http.get('http://127.0.0.1:5000/init')
       .success(function(response){
-        $('#loading').removeClass().addClass('bounceOut animated');
+        $('#loading').toggle();
         $('#next').toggle().addClass('bounceIn animated');
         audio.pause();
       }).error(function(error){
@@ -59,5 +59,6 @@ demo.controller('ComputeController', function($scope, $http) {
   };
 });
 
-
-
+$(function() {
+    $.material.init();
+});
