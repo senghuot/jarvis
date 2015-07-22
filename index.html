@@ -16,6 +16,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/material-design/scripts/material.js"></script>
     <script src="bower_components/material-design/scripts/ripples.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
@@ -35,16 +36,17 @@
             </div>
             <a href="javascript:void(0)" id="init" class="btn btn-default btn-raised btn-lg" ng-click="initBtnClicked()">Initialize Now</a>
             <a href="javascript:void(0)" id="learn-more" class="btn btn-default btn-raised btn-lg">Learn More</a>
-            <br />
-            <button id="next" type="button" class="btn btn-lg btn-primary" ng-click="nextBtnClicked()">next</button>
             <div id="loading" class="spinner">
               <div class="double-bounce1"></div>
               <div class="double-bounce2"></div>
             </div>
         </div>
+        <div id="go-down" class="icon-preview shake animated">
+            <i id="go-down-hand" class="mdi-hardware-keyboard-arrow-down"></i>
+        </div>
     </section>
 
-    <section id="compute" class="fadeInUpBig animated" ng-controller="ComputeController">
+    <section id="compute" class="animated wow" ng-controller="ComputeController">
         <div class="row">
             <div class="container text-center">
               <div class="col-xs-8 col-xs-offset-2">
@@ -64,12 +66,12 @@
         </div>
         <div class="row">
             <div class="container">
-                <div class="col-xs-3">
+                <div class="col-xs-3 bounceInLeft animated wow">
                     <h2>Sandbox</h2>
                     <textarea id="input" class="form-control" rows="18" ng-model="sandbox" ng-change="change()"></textarea>
                 </div>
 
-                <form novalidate class="form-horizontal col-xs-8 col-xs-offset-1">
+                <form novalidate class="form-horizontal col-xs-8 col-xs-offset-1 bounceInRight animated wow">
                     <h2 class="col-xs-offset-1">Input Your Data</h2>
                     <div class="form-group">
                         <label for="inputEmail" class="control-label col-xs-2">Amount</label>

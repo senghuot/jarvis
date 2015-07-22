@@ -16,6 +16,19 @@ html, body {
   color: white;
 }
 
+#go-down {
+  text-align: center;
+  display: none; 
+}
+
+#go-down-hand{
+  font-size: 100px;
+}
+
+#go-down-hand:hover {
+  cursor: pointer; 
+}
+
 #init {
   background-color: rgb(213, 213, 213);
 }
@@ -73,11 +86,11 @@ html, body {
 }
 
 .spinner {
-  display: none;
+  opacity: 0;
   width: 200px;
   height: 200px;
   position: relative;
-  margin: 100px auto;
+  margin: 50px auto;
 }
 
 .double-bounce1, .double-bounce2 {
@@ -138,7 +151,6 @@ html, body {
 ============================ */
 
 #compute {
-  z-index: 1041;
   position: relative;
   padding: 100px 0;
   background-image: url("../images/compute-banner.png");
