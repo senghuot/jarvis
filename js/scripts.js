@@ -37,10 +37,34 @@ demo.controller('ComputeController', function($scope, $http) {
     var data = {customers:[$scope.customer]};
     $http.post('http://127.0.0.1:5000/compute', data)
       .success(function(response) {
+        if(response.label > 1)
+          $scope.win = false;
+        else
+          $scope.win = true;
         $scope.response = response;
+        $scope.buildResult();
       }).error(function(error) {
         console.log(error);
       });
+  };
+
+  $scope.buildResult = function()
+  {
+    $scope.result = {};
+    var temp;
+    var name;
+    var val1;
+    var val2;
+    for (key in $scope.keys)
+    {
+      temp = [];
+      name = keys[key];
+      val1 = $scope.customer[name];
+      val2 = $scope.response.recommend[name];
+      temp.push(val1);
+      temp.push(val2);
+      $scope.result[name] = temp;
+    }
   };
 
   // convert sandbox string to useful JSON
@@ -52,6 +76,7 @@ demo.controller('ComputeController', function($scope, $http) {
       tmp[key] = vals[i]
     }
     $scope.customer = tmp;
+    $scope.keys = keys;
   };
 });
 
