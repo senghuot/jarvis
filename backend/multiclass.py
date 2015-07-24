@@ -15,7 +15,7 @@ class Multiclass:
   # this algorithm follows directly from class
   def train(self):
     clf = tree.DecisionTreeClassifier(max_depth=5, criterion='entropy')
-    train_tmp = genfromtxt('data/multiclass/multiclass-number.txt')
+    train_tmp = genfromtxt('data/multiclass/training.txt')
 
     # setting up hyper parameters
     TRAIN_LEN = len(train_tmp)
@@ -40,7 +40,7 @@ class Multiclass:
         self.rec_x.append(tmp_x)
 
     # testing set
-    test_tmp = genfromtxt('data/multiclass/multiclass-test.txt')
+    test_tmp = genfromtxt('data/multiclass/testing.txt')
     test_x = []
     test_y = []
     for i in range(len(test_tmp)):
