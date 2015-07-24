@@ -10,7 +10,7 @@ html, body {
 ============================ */
 #intro {
   min-height: 100%;
-  padding-top: 220px;
+  padding-top: 120px;
   background-image: url("../images/polygon-bg-blue.jpg");
   background-size: 100% 100%;
   color: white;
@@ -154,6 +154,22 @@ html, body {
   position: relative;
   padding: 100px 0;
   background-image: url("../images/compute-banner.png");
+}
+
+.modal-header {
+  padding-bottom: 24px!important;
+}
+
+.modal-header h4 {
+  color: white;
+}
+
+.win {
+  background-color: #009688;
+}
+
+.loss {
+  background-color: #FD4638;
 }
 
 
