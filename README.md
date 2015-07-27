@@ -15,7 +15,7 @@ You should definately read the [documentation](files/documentation.pdf) I've inc
 ```
     The MIT License (MIT)
 
-    Copyright (c) 2014 Robin Chutaux
+    Copyright (c) 2015
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
