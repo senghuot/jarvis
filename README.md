@@ -1,4 +1,5 @@
-# jarvis
+# Jarvis
+## Artificial Intelligent assistent driven by BIG DATA.
 
 ### MIT License
 
