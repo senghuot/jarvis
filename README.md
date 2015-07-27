@@ -1,6 +1,6 @@
 # Jarvis
 
-Jarvis runs on data-drive Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations. Jarvis is a self-contain unit, it gets smarter as users provide more data.
+Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations.
 
 ## What's the goal of Jarvis?
 
