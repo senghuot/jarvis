@@ -28,7 +28,7 @@
 
                 <h2>Artificial Intelligent assistent driven by BIG DATA.</h2>
                 <p class="blub">
-                    Jarvis runs on data-drive Machine Learning algoirthms, a subset of Aritificial Intelligent to learn from its experiences in order to intelligently assist and provide recommendations. Jarvis is a self-contain unit, it gets smarter as users provide more data. 
+                    Jarvis runs on data-drive Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations. Jarvis is a self-contain unit, it gets smarter as users provide more data. 
                 </p>
             </div>
             <a href="javascript:void(0)" id="init" class="btn btn-default btn-raised btn-lg icon-preview shake animated" ng-click="initBtnClicked()">Start Now</a>
@@ -214,8 +214,7 @@
                 <div class="modal-content">
                    <div class="modal-header" ng-class="win ? 'win' : 'loss'">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 ng-show="win" class="modal-title text-center">Congrats...<span class="typed-cursor">|</span></h4>
-                        <h4 ng-show="!win" class="modal-title text-center">{{label}}...<span class="typed-cursor">|</span></h4>
+                        <h4 class="modal-title text-center">{{label}}</h4>
                     </div>
                     <div class="panel-body">
                         <table class="table table-striped">
@@ -236,7 +235,6 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" data-dismiss="modal">Feedback</button>
-                        <button class="btn btn-default btn-raised" data-dismiss="modal">Dismiss</button>
                     </div>
                 </div>
             </div>
