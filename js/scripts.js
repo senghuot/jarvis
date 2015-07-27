@@ -1,6 +1,4 @@
-// defining our module first
-var demo = angular.module('demo', []);
-
+// here we would like to define how to converter, an array is necessary to keep the order because a map wont preserve order
 var keys = ["amount", "accountType", "bookingType", "expectedRevenue", "productCount","recordType"];
     keys = keys.concat(["forecastCategory", "leadSource", "annualRevenue", "employeeCount"]);
     keys = keys.concat(["coreProduct", "locationCount", "producerCount", "oppRevenue", "oppCount"]);
@@ -15,6 +13,8 @@ var map = {'accountType': {'-1':'Unknown', 1:'Customer', 2:'Former Customer', 3:
                         18:'Marketing Campaign', 19:'Public Relations', 20:'Other'};
     map['label'] = {1:'Won', 2:'Approved', 3:'Propose', 4:'Prospect', 5:'Qualify', 6:'Solution Developement', 7:'Whitespace', 8:'Closed'};
 
+// this is where we define our module. 
+var demo = angular.module('demo', []);
 demo.controller('IntroController', function ($scope, $http) {
   $scope.initBtnClicked = function(){
     // display loading screen
@@ -57,6 +57,7 @@ demo.controller('ComputeController', function($scope, $http) {
       });
   };
 
+  // display result by converting encoded int back to string
   $scope.buildResult = function() {
     $scope.result = {};
     for (key in keys) {
