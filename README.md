@@ -8,7 +8,7 @@ The goal of jarvis is to predict the pattern of a business transaction. Multicla
 
 ## How to extend your own version of Jarvis?
 
-You should definately read the documentation I've included in this project...
+You should definately read the [documentation](files/documentation.pdf) I've included in this project...
 
 ### MIT License
 
