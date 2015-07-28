@@ -51,6 +51,7 @@ demo.controller('ComputeController', function($scope, $http) {
         else
           $scope.win = true;
         $scope.response = response;
+        console.log(response)
         $scope.buildResult();
       }).error(function(error) {
         console.log(error);

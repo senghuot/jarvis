@@ -20,24 +20,25 @@ def init():
 
 @app.route("/compute", methods=['GET', 'POST'])
 def compute():
-  # leave it here for testing only
-  # init()
-
   # parse our json object to a matrix array
   customers = request.get_json()
   data =  parse(customers['customers'])
+  data = [data, data]
 
   # compute the data and determine the classifier
-  label     = classifier.compute(data)
-  recommend = classifier.recommend(data).getA1()
+  labels     = classifier.compute(data)
+  recommends = classifier.recommend(data)
 
-  tmp = {}
-  for i in range(len(keys)):
-    key = keys[i]
-    val = recommend[i]
-    tmp[key] = val
+  tmps = []
+  for recommend in recommends:
+    tmp = {}
+    for i in range(len(keys)):
+      key = keys[i]
+      val = recommend[i]
+      tmp[key] = val
+    tmps.append(tmp)
 
-  return jsonify(label=label, recommend=tmp)
+  return jsonify(label=labels, recommend=tmps)
 
 # this is a helper method to parse the data from json into a matrix to follow
 # the format and performance
@@ -46,21 +47,9 @@ def parse(data):
   for i in range(len(data)):
     tmp_json = data[i]
 
-    res.append(int(tmp_json['amount']))
-    res.append(int(tmp_json['accountType']))
-    res.append(int(tmp_json['bookingType']))
-    res.append(int(tmp_json['expectedRevenue']))
-    res.append(int(tmp_json['producerCount']))
-    res.append(int(tmp_json['recordType']))
-    res.append(int(tmp_json['forecastCategory']))
-    res.append(int(tmp_json['leadSource']))
-    res.append(int(tmp_json['annualRevenue']))
-    res.append(int(tmp_json['employeeCount']))
-    res.append(int(tmp_json['coreProduct']))
-    res.append(int(tmp_json['locationCount']))
-    res.append(int(tmp_json['producerCount']))
-    res.append(int(tmp_json['oppRevenue']))
-    res.append(int(tmp_json['oppCount']))
+    # use the keys to avoid typo
+    for key in keys:
+      res.append(int(tmp_json[key]))
 
   return res
 

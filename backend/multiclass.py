@@ -86,25 +86,36 @@ class Multiclass:
       # Storing all classifer and its weight
       self.classifers.append((alpha, copy.deepcopy(clf)))
 
+
   def compute(self, test_x):
-    tmp = [0, 0, 0, 0, 0, 0, 0, 0]
-    for alpha, clf in self.classifers:
-      predicted_y = int(clf.predict(test_x)) - 1
-      tmp[predicted_y] += alpha
-    return self.getIndex(tmp)
+    res = []
+    for x in test_x:
+      tmp = [0, 0, 0, 0, 0, 0, 0, 0]
+      for alpha, clf in self.classifers:
+        predicted_y = int(clf.predict(x)) - 1
+        tmp[predicted_y] += alpha
+      
+      # building up our result
+      res.append(self.getIndex(tmp))
+    return res
 
 
   def recommend(self, test_x):
-    diff    = self.rec_x - test_x
-    sim_x   = None
-    sim_dis = 0
-    for i in range(len(diff)):
-      tmp = math.sqrt(diff[i] * diff[i].T)
-      sim = 1.0 / (1 + tmp)
-      if (sim > sim_dis):
-        sim_dis = sim
-        sim_x = self.rec_x[i]
-    return sim_x
+    res = []
+    for x in test_x:
+      diff    = self.rec_x - x
+      sim_x   = None
+      sim_dis = 0
+      for i in range(len(diff)):
+        tmp = math.sqrt(diff[i] * diff[i].T)
+        sim = 1.0 / (1 + tmp)
+        if (sim > sim_dis):
+          sim_dis = sim
+          sim_x = self.rec_x[i]
+      
+      # building up our result
+      res.append(array(sim_x)[0].tolist())
+    return res
 
 
   # return the percentage of accuracy rate
