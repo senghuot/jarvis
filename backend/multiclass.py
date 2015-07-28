@@ -8,7 +8,7 @@ class Multiclass:
   def __init__(self):
     self.classifers = []
     self.rec_x      = []
-    self.ITERATIONS = 182
+    self.ITERATIONS = 10
     self.K          = 8
     self.train()
 
@@ -99,7 +99,7 @@ class Multiclass:
       res.append(self.getIndex(tmp))
     return res
 
-
+  #  using linear combination of euclidean distance we make a simple recommender system
   def recommend(self, test_x):
     res = []
     for x in test_x:
@@ -114,7 +114,7 @@ class Multiclass:
           sim_x = self.rec_x[i]
       
       # building up our result
-      res.append(array(sim_x)[0].tolist())
+      res.append({'distance': sim_dis, 'recommend': array(sim_x)[0].tolist()})
     return res
 
 
@@ -141,7 +141,6 @@ class Multiclass:
       if predicted_y[i] > res_val:
         res_val = predicted_y[i]
         res_index = i
-
     return res_index + 1
 
   # return 1 if the n1 and n2 are not equal, otherwise return 0

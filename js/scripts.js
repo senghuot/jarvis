@@ -43,15 +43,10 @@ demo.controller('ComputeController', function($scope, $http) {
   // compute the result without encodig the result first
   $scope.computeBtnClicked = function() {
     // construct an array to be computed
-    var data = {customers:[$scope.customer]};
+    var data = {customers: $scope.customers};
     $http.post('http://127.0.0.1:5000/compute', data)
       .success(function(response) {
-        if(response.label > 1)
-          $scope.win = false;
-        else
-          $scope.win = true;
         $scope.response = response;
-        console.log(response)
         $scope.buildResult();
       }).error(function(error) {
         console.log(error);
@@ -60,29 +55,42 @@ demo.controller('ComputeController', function($scope, $http) {
 
   // display result by converting encoded int back to string
   $scope.buildResult = function() {
-    $scope.result = {};
-    for (key in keys) {
-      var name            = keys[key];
-      var cus_val         = $scope.customer[name];
-      var rec_val         = $scope.response.recommend[name];
-      if (map[name] !== undefined) {
-        cus_val = map[name][cus_val];
-        rec_val = map[name][rec_val];
+    $scope.results = [];
+    for (var i = 0; i < $scope.response.labels.length; i++) {
+      var label = map['label'][$scope.response.labels[i]]; 
+      var recommend = {};
+      for (var key in keys) {
+        var name            = keys[key];
+        var cus_val         = $scope.customers[i][name];
+        var rec_val         = $scope.response.recommends[i][name];
+        if (map[name] !== undefined) {
+          cus_val = map[name][cus_val];
+          rec_val = map[name][rec_val];
+        }
+        recommend[name] = [cus_val, rec_val];
       }
-      $scope.result[name] = [cus_val, rec_val];
+      $scope.results.push({'label': label, 'recommend': recommend});
     }
-    $scope.label = map['label'][$scope.response.label];
+    console.log($scope.results);
   };
 
   // convert sandbox string to useful JSON
   $scope.change = function() {
-    var vals = $scope.sandbox.split("\t");
-    var tmp = {};
-    for (var i = 0; i < keys.length; i++) {
-      key       = keys[i];
-      tmp[key]  = vals[i];
+    var tmp;
+    var tmps = [];
+    var vals = $scope.sandbox.split("\n");
+    for (var i in vals) {
+      var val = vals[i];
+      var val = val.split("\t");
+      tmp = {};
+      for (var i = 0; i < keys.length; i++) {
+        key       = keys[i];
+        tmp[key]  = val[i];
+      }
+      tmps.push(tmp);
     }
     $scope.customer = tmp;
+    $scope.customers = tmps;
   };
 });
 

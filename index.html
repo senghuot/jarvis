@@ -211,30 +211,32 @@
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                   <div class="modal-header" ng-class="win ? 'win' : 'loss'">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title text-center">{{label}}</h4>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th></th>
-                                <th>Current Case</th>
-                                <th>Similar Won</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="(key, value) in result">
-                                    <td>{{key}}</td>
-                                    <td ng-repeat="num in value track by $index">{{num}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" data-dismiss="modal">Feedback</button>
+                <div ng-repeat="result in results">
+                    <div class="modal-content">
+                       <div class="modal-header" ng-class="(result.label == 'Won') ? 'win' : 'loss'">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title text-center">{{result.label}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th></th>
+                                    <th>Current Case</th>
+                                    <th>Similar Won</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in result.recommend">
+                                        <td>{{key}}</td>
+                                        <td ng-repeat="num in value track by $index">{{num}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button class="btn btn-primary" data-dismiss="modal">Feedback</button> -->
+                        </div>
                     </div>
                 </div>
             </div>
