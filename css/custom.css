@@ -10,10 +10,10 @@ html, body {
 ============================ */
 #intro {
   min-height: 100%;
-  padding-top: 100px;
-  background-image: url("../images/polygon-bg-blue.jpg");
+  padding-top: 250px;
+  background-image: url("../images/bg.png");
   background-size: 100% 100%;
-  color: white;
+  color: black;
 }
 
 #go-down {
@@ -31,8 +31,8 @@ html, body {
 
 #init {
   margin-top: 20px;
+  background-color: #ff5200;
   color: white;
-  border: white 1px solid;
   padding: 20px 60px;
 }
 
@@ -44,17 +44,18 @@ html, body {
 
 .slogan > h1 {
   font-size: 50px;
-  font-weight: 600;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .slogan > h2 {
   font-size: 35px;
-  color: #1795c5;
+  color: #ff5200;
 }
 
 .slogan > .blub {
   font-size: 17px;
   font-weight: 100;
+  color: black;
 }
 
 .typed-cursor{
@@ -172,10 +173,12 @@ html, body {
 ============================ */
 
 #about {
-  color: white;
+  color: black;
   background-color: rgb(61, 61, 61);
   padding-top: 100px;
   padding-bottom: 100px;
+  background-size: 100%, 100%;
+  background-image: url("../images/bg2.png");
 }
 
 .about-box-desc {

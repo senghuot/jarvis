@@ -2,7 +2,7 @@
 <html lang="en-US" data-ng-app="demo">
 <head>
     <meta charset="UTF-8">
-    <title>Jarvis</title>
+    <title>Vertafore Sales Assistant</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/material-design/dist/css/material.css">
     <link href="bower_components/material-design/dist/css/roboto.min.css" rel="stylesheet">
@@ -10,6 +10,7 @@
     <link href="bower_components/material-design/dist/css/ripples.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -24,11 +25,11 @@
     <section id="intro" data-ng-controller="IntroController">
         <div class="container text-center">
             <div class="slogan">
-                <h1>J.A.R.V.I.S - Mark <span class="typed-cursor">1</span></h1>
+                <h1>Vertafore Sales Assistant</h1>
 
                 <h2>Artificial Intelligent assistent driven by BIG DATA.</h2>
                 <p class="blub">
-                    Jarvis runs on data-drive Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations. Jarvis is a self-contain unit, it gets smarter as users provide more data. 
+                    Vertafore Sales Assistant (VSA) runs on data-drive Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations. VSA is a self-contain unit, it gets smarter as users provide more data. 
                 </p>
             </div>
             <a href="javascript:void(0)" id="init" class="btn btn-default btn-raised btn-lg icon-preview shake animated" ng-click="initBtnClicked()">Start Now</a>
@@ -67,11 +68,11 @@
                 <form novalidate class="form-horizontal col-xs-8 col-xs-offset-1 bounceInRight animated wow">
                     <h2 class="col-xs-offset-1">Input Your Data</h2>
                     <div class="form-group">
-                        <label for="inputEmail" class="control-label col-xs-2">Amount</label>
+                        <label for="inputEmail" class="control-label col-xs-2">Amount $</label>
                         <div class="col-xs-4">
                             <input type="text" class="form-control" ng-model="customer.amount">
                         </div>
-                        <label for="inputEmail" class="control-label col-xs-2">Annual Revenue</label>
+                        <label for="inputEmail" class="control-label col-xs-2">Annual Revenue $</label>
                         <div class="col-xs-4">
                             <input type="text" class="form-control" ng-model="customer.annualRevenue">
                         </div>
@@ -270,7 +271,7 @@
 
       <div class="row">
         <div class="col-xs-2 col-xs-offset-5">
-          <hr class="marginbot-50">
+          <hr class="marginbot-50" style="border-top: black 1px solid;">
         </div>
       </div>
 
