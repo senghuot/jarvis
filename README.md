@@ -2,6 +2,8 @@
 
 Machine Learning algoirthms, a subset of Aritificial Intelligent, to learn from its experiences in order to intelligently assist and provide recommendations.
 
+Video: https://www.youtube.com/watch?v=hTy0UPoH9AU
+
 ## What's the goal of Jarvis?
 
 The goal of jarvis is to predict the pattern of a business transaction. Multiclass-Adaboost and Decision, Jarvis can predict upto 92% accuracy whether a customer is going to make a purchase or cancel in advance and provide feedbacks to the sellers on how to improve the chance of convincing the customers to make a purchase by offering a similar successful transaction.
